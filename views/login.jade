@@ -1,0 +1,14 @@
+extends layout
+
+block content
+  h1  #{title}
+
+  form(method='post', action='/postlogin', id="formic")
+    | Username:    
+    input(name='username', id="nameIn")
+    div
+      | Favorite Color:    
+      input(name='color', id="colorIn")
+
+    button('type='submit')
+      | Login
