@@ -101,7 +101,7 @@ exports.completeTask = function(req, res) {
     existingUser = User.find({'username':req.session.user.username}).exec(function(err, existingUser) {
           console.log(err);
           req.session.user = existingUser[0];
-          //res.redirect("/");
+          res.redirect("/");
         });
 
 }
