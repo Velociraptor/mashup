@@ -33,6 +33,7 @@ app.get('/', user.toDoList);
 app.get('/login', user.login);
 app.post('/postlogin', user.postlogin);
 app.post('/addTask', user.addTask);
+app.post('/tasks/complete', user.completeTask)
 app.get('/logout', user.destroy);
 
 http.createServer(app).listen(app.get('port'), function(){

@@ -1,14 +1,16 @@
 extends layout
 
 block content
-  h1  #{title}
+  body(style="background-color:black; color:white, text-align:center")
+    h1(style='color:white; text-align:center')= "Welcome to Teux View"
+      h3(style='color:white; text-align:center')  #{title}
 
-  form(method='post', action='/postlogin', id="formic")
-    | Username:    
-    input(name='username', id="nameIn")
-    div
-      | Favorite Color:    
-      input(name='color', id="colorIn")
+      form(style='color:white; text-align:center', method='post', action='/postlogin', id="formic")
+        | Username:  
+        input(style='margin:20px 20px 20px 20px', name='username', id="nameIn")
+        div
+          | Favorite Color:   
+          input(name='color', id="colorIn")
 
-    button('type='submit')
-      | Login
+        button(style='margin:20px 20px 20px 20px', 'type='submit')
+          | Login

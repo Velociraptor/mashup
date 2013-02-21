@@ -4,7 +4,7 @@ var Day = models.Day;
 var Task = models.Task;
 
 exports.login = function(req, res){
-  res.render("login", {'title':'Log In Please'});
+  res.render("login", {'title':'Please Log In'});
 };
 
 function findGifs(taskArrayLen) {
@@ -27,7 +27,7 @@ exports.toDoList = function(req, res){
     // show user's todo items
     //console.log(req.session.user);
     //res.render("todolist", {'title':"Hello " + req.session.user.username + '!', user:req.session.user, giflist:findGifs(req.session.user.taskList)});
-    res.render("todolist", {'title':"Hello " + req.session.user.username + '!', user:req.session.user});
+    res.render("todolist", {'title':"Hello " + req.session.user.username + '!   ', user:req.session.user});
   }
 }
 
@@ -82,6 +82,28 @@ exports.addTask = function(req, res) {
           res.redirect("/");
         });
   //});
+}
+
+exports.completeTask = function(req, res) {
+  var params = req.body;
+  var index = req.session.user.taskList.indexOf(params['1']);
+  var taskList = req.session.user.taskList;
+  console.log(taskList);
+  var gifList = req.session.user.gifList;
+  taskList.splice(index, 1);
+  console.log(taskList);
+  gifList.splice(index, 1);
+  User.update({'username':req.session.user.username}, {'taskList':taskList, 'gifList':gifList}, function (err) {
+          if (err) {
+            return console.log("error we couldn't delete your task and gif");
+          } 
+        })
+    existingUser = User.find({'username':req.session.user.username}).exec(function(err, existingUser) {
+          console.log(err);
+          req.session.user = existingUser[0];
+          //res.redirect("/");
+        });
+
 }
 
 exports.postlogin = function(req, res){

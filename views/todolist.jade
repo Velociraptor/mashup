@@ -2,10 +2,9 @@ extends layout
 
 block content
   body(style="background-color:#{user.color}")
-    div(style='text-align: center')
-      h1= title
+    div(style='text-align: center; background-color:black; color:white; padding:20px 30px 20px 30px; margin: 0 0 0 0')
       h1= "Welcome to Teux View"
-      h2= "Here Are Your Current To Do GIFs"
+      h3= title + "   Here Are Your Current To Do GIFs"
       a(href='/logout')
         | Change User or Color
 
@@ -14,10 +13,10 @@ block content
       //-     a(href='/logout')
       //-       | Change User or Color
 
-    form(style='text-align: center', class='row', method='post', action='/addTask', id="formTask")
-      | New Task Keyword:    
-      input(name='newtask', id="newTask")
-      div
+    form(style='text-align: center; font-size:22px; font-weight:bold; margin:20px 30px 20px 30px', class='row', method='post', action='/addTask', id="formTask")
+      | New Task Keyword:      
+      input(style='', name='newtask', id="newTask")
+      div(style='margin:20px 30px 20px 30px')
         input(type='hidden', name='username', value='#{user.username}')
         input(type='hidden', name='usertasks', value='#{user.taskList}')
 
@@ -25,16 +24,18 @@ block content
         | Enter Task
 
     container(style='text-align: center', class='row', id='container')
-      div(style='text-align: center', class='span2')
+      div(style='text-align: center', class='span2 offset2')
         a(style='font-size:100px')#ui-carousel-prev(href='#') <
       div(style='text-align: center', class='span6', id='listCarousel')
         //each task, i in user.taskList.reverse()
         each task, i in user.taskList
-          div
+          div(style=)
             img(src='#{user.gifList[user.taskList.length-i-1]}')
-            p(style='font-size:32px', class='task') #{user.taskList[user.taskList.length-i-1]}
+            p(style='font-size:32px; margin: 20px 20px 20px 20px', class='task') #{user.taskList[user.taskList.length-i-1]}
             //img(src='http://24.media.tumblr.com/tumblr_lw067mFA4K1r81qhto1_400.gif', alt='task gif')
             //img(src='#{giflist[i]}')
+            button(class='completeTask', id=user.taskList[user.taskList.length-i-1])
+              | Complete Task
             
 
         //- each day, i in user.dayList
